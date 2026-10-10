@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Credit risk assessment powered by machine learning." />
+  <title>CreditLens — Credit Risk Assessment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="style.css"/> -->
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="CreditLens home">
+      <span class="brand-mark"><span></span><span></span><span></span></span>
+      <span>CreditLens</span>
+    </a>
+    <div class="status-pill"><i></i> Model online</div>
+  </header>
+
+  <main id="top" class="page-shell">
+    <section class="hero">
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span></span> ML CREDIT RISK ASSESSMENT</div>
+        <h1>Make a smarter<br><em>risk decision.</em></h1>
+        <p>Enter the applicant and loan details. The model estimates the probability of default and compares it with your optimized decision threshold.</p>
+        <div class="hero-note">
+          <span class="note-icon">↗</span>
+          <span>Built for fast, explainable screening — not a final lending decision.</span>
+        </div>
+      </div>
+
+      <div class="hero-orbit reveal delay-1" aria-hidden="true">
+        <div class="orbit-ring ring-a"></div>
+        <div class="orbit-ring ring-b"></div>
+        <div class="orbit-core">
+          <div class="core-grid"></div>
+          <strong>AI</strong>
+          <span>RISK ENGINE</span>
+        </div>
+        <div class="orbit-dot dot-one"></div>
+        <div class="orbit-dot dot-two"></div>
+        <div class="orbit-dot dot-three"></div>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <form id="riskForm" class="card form-card" novalidate>
+        <div class="card-heading">
+          <div>
+            <span class="section-kicker">APPLICATION</span>
+            <h2>Applicant profile</h2>
+          </div>
+          <span class="step-count">01 <b>/</b> 02</span>
+        </div>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>Age</span>
+            <input id="person_age" name="person_age" type="number" min="18" max="100" value="30" required />
+            <small>18–100 years</small>
+          </label>
+          <label class="field">
+            <span>Annual income</span>
+            <div class="input-prefix"><b>$</b><input id="person_income" name="person_income" type="number" min="1" step="100" value="60000" required /></div>
+            <small>Gross yearly income</small>
+          </label>
+          <label class="field">
+            <span>Home ownership</span>
+            <select id="person_home_ownership" name="person_home_ownership" required>
+              <option value="RENT">Rent</option>
+              <option value="OWN">Own</option>
+              <option value="MORTGAGE">Mortgage</option>
+              <option value="OTHER">Other</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Employment length</span>
+            <div class="input-suffix"><input id="person_emp_length" name="person_emp_length" type="number" min="0" max="100" step="0.5" value="5" required /><b>yrs</b></div>
+            <small>Current employment</small>
+          </label>
+          <label class="field">
+            <span>Loan intent</span>
+            <select id="loan_intent" name="loan_intent" required>
+              <option value="EDUCATION">Education</option>
+              <option value="MEDICAL">Medical</option>
+              <option value="VENTURE">Venture</option>
+              <option value="PERSONAL">Personal</option>
+              <option value="DEBTCONSOLIDATION">Debt consolidation</option>
+              <option value="HOMEIMPROVEMENT">Home improvement</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Loan grade</span>
+            <select id="loan_grade" name="loan_grade" required>
+              <option value="A">A — strongest</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G — weakest</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="divider"></div>
+        <div class="card-heading compact">
+          <div>
+            <span class="section-kicker">LOAN & CREDIT</span>
+            <h2>Financial details</h2>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>Loan amount</span>
+            <div class="input-prefix"><b>$</b><input id="loan_amnt" name="loan_amnt" type="number" min="1" step="100" value="10000" required /></div>
+          </label>
+          <label class="field">
+            <span>Interest rate</span>
+            <div class="input-suffix"><input id="loan_int_rate" name="loan_int_rate" type="number" min="0" max="100" step="0.01" value="10.5" required /><b>%</b></div>
+          </label>
+          <label class="field">
+            <span>Loan / income ratio</span>
+            <div class="input-suffix"><input id="loan_percent_income" name="loan_percent_income" type="number" min="0.01" max="1" step="0.01" value="0.17" required /><b>ratio</b></div>
+            <small>Example: 0.17 = 17%</small>
+          </label>
+          <label class="field">
+            <span>Previous default</span>
+            <select id="cb_person_default_on_file" name="cb_person_default_on_file" required>
+              <option value="N">No previous default</option>
+              <option value="Y">Previous default</option>
+            </select>
+          </label>
+          <label class="field field-wide">
+            <span>Credit history length</span>
+            <div class="input-suffix"><input id="cb_person_cred_hist_length" name="cb_person_cred_hist_length" type="number" min="0" max="100" value="8" required /><b>yrs</b></div>
+          </label>
+        </div>
+
+        <button id="predictBtn" class="predict-btn" type="submit">
+          <span class="btn-label">Assess credit risk</span>
+          <span class="btn-arrow">→</span>
+          <span class="spinner"></span>
+        </button>
+        <p id="errorMessage" class="error-message" role="alert"></p>
+      </form>
+
+      <aside class="card result-card" id="resultCard">
+        <div class="result-top">
+          <div>
+            <span class="section-kicker">MODEL OUTPUT</span>
+            <h2>Risk assessment</h2>
+          </div>
+          <span class="live-dot"><i></i> LIVE</span>
+        </div>
+
+        <div class="result-empty" id="emptyState">
+          <div class="empty-orb"><span>◎</span></div>
+          <h3>Ready when you are</h3>
+          <p>Complete the application and run the assessment to see the model's risk signal here.</p>
+        </div>
+
+        <div class="result-content hidden" id="resultContent">
+          <div class="risk-badge" id="riskBadge">LOW RISK</div>
+          <div class="score-wrap">
+            <div class="score-ring" id="scoreRing">
+              <div class="score-inner">
+                <strong id="probabilityText">0%</strong>
+                <span>default probability</span>
+              </div>
+            </div>
+          </div>
+          <div class="decision-copy">
+            <span>MODEL DECISION</span>
+            <h3 id="decisionTitle">Low Risk</h3>
+            <p id="decisionText">The estimated default probability is below the optimized decision threshold.</p>
+          </div>
+          <div class="metric-row">
+            <div><span>Probability</span><strong id="probabilityMetric">0.00%</strong></div>
+            <div><span>Threshold</span><strong id="thresholdMetric">0.00%</strong></div>
+          </div>
+          <div class="threshold-track">
+            <div class="track-labels"><span>0%</span><span>Decision threshold</span><span>100%</span></div>
+            <div class="track"><i id="thresholdMarker"></i><b id="probabilityMarker"></b></div>
+          </div>
+          <p class="disclaimer">This result is an ML prediction based on the supplied inputs. Use appropriate human and policy review before making lending decisions.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="feature-strip">
+      <div><span>01</span><strong>Probability-based</strong><p>See the model's estimated chance of default.</p></div>
+      <div><span>02</span><strong>Threshold tuned</strong><p>Decision uses your saved optimized threshold.</p></div>
+      <div><span>03</span><strong>Instant response</strong><p>Prediction is returned directly from your API.</p></div>
+    </section>
+  </main>
+
+  <footer>CreditLens <span>•</span> Machine Learning Credit Risk Assessment</footer>
+  <!-- <script src="script.js"></script> -->
+  <script src="/static/script.js"></script>
+</body>
+</html>
