@@ -1,6 +1,6 @@
-myenv
+myenv/
 venv/
-pycache/
+__pycache__/
 *.py[cod]
 .env
 .vscode/
